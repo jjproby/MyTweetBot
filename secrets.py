@@ -1,7 +1,7 @@
 #secrets.py
 
-consumer_key = 'x8yoIKKx2XW47tV6DVrvBSL7e'
-consumer_secret = 'mCMiWQr3rwLbb5G0xFdr0C5RNqbX33KnyAFhtEgLNS87pcrOxL'
+consumer_key = 'rVT4uRELl016dAah4EiJQbq5H'
+consumer_secret = 'Hg37xzpUFU2D6LszNlPfCyhcVincmomTkVQAftYEy8ZfBl7tue'
 
-access_token = '956985013253353473-AMt2TjQc92YHP7sGOLXOVJg2CdukKvY'
-access_secret = 'rUIYWjY3xA3FIIJNvqWoiMJTquPnhoBCwdps5VjUWyPiN'
+access_token = '956985013253353473-s6mzrS00jSxrhlWbYSs8qmd0zNZ0HMU'
+access_secret = 'VbdhfqFuyTSx56BAAsPx2lkRElu2vuRJJ97i8LlDiV01E'

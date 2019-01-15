@@ -13,3 +13,11 @@ auth.set_access_token(access_token, access_secret)
 #construts the API instance
 
 api = tweepy.API(auth) #creates API object
+
+#reads tweets in timeline
+
+
+public_tweets = api.user_timeline('Lin_Manuel')
+for tweet in public_tweets:
+    tweet.text = tweet.text.encode('utf-8')
+    print(tweet.text)
