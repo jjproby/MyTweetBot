@@ -6,6 +6,9 @@ import requests
 from io import BytesIO
 from PIL import Image
 import random
+from PIL import ImageFile
+
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 def tweet_image(url, username, status_id):
     filename = 'temp.png'
