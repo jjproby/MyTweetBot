@@ -76,6 +76,7 @@ auth.set_access_token(access_token, access_secret)
 
 api = tweepy.API(auth) #creates API object
 
+
 #constructs the Stream instance
 myStreamListener = BotStreamer()
 
@@ -83,4 +84,12 @@ stream = tweepy.Stream(auth, myStreamListener)
 # filter all tweets tweeted at the bot
 stream.filter(track=['@jjproby719'])
 
-api.update_status("I am a bot and I did a thing!")
+
+"""
+
+#tweets on the authenticated users profile
+api.update_status("This is a test status")
+
+"""
+
+
