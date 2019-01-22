@@ -1,12 +1,19 @@
 #wordOfDay.py
 
 from wordnik import *
+from secrets import *
+import tweepy
 
-apiUrl = 'http://api.wordnik.com/v4'
-apiKey = '9b827dd68c55dc3fd010e05126d08aaeedeec622e6ea8ed29'
-client = swagger.ApiClient(apiKey, apiUrl)
 
-wordApi = WordApi.WordApi(client)
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+
+auth.set_access_token(access_token, access_secret)
+
+tweetApi = tweepy.API(auth)
+
+wordClient = swagger.ApiClient(apiKey, apiUrl)
+
+wordApi = WordApi.WordApi(wordClient)
 
 """
 example = wordApi.getWord('irony')
@@ -14,9 +21,14 @@ print example.word
 """
 
 
-randomApi = WordsApi.WordsApi(client)
+randomApi = WordsApi.WordsApi(wordClient)
 random = randomApi.getRandomWord()
-print random.word
+print random.word.capitalize()
 
 randomlist = wordApi.getDefinitions(random.word)
 print randomlist[0].text
+
+
+tweetApi.update_status("Random word for everyone! \n" + random.word.capitalize() + ": " + randomlist[0].text)
+
+print("Tweet sent!")
