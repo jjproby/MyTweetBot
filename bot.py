@@ -21,7 +21,8 @@ def tweet_image(url, username, status_id):
         i.save(filename)
         scramble(filename)
         #Update the authenticated user's status
-        api.update_with_media('scramble.png', status='@{0}'.format(username), in_replp_to_status_id=status_id)
+        api.update_with_media('scramble.png', status='@{0}'.format(username), in_reply_to_status_id=status_id)
+	print("tweet sent!")
     else:
         print("unable to download image")
 
