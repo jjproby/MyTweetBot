@@ -29,6 +29,11 @@ randomlist = wordApi.getDefinitions(random.word)
 print randomlist[0].text
 
 
-tweetApi.update_status("Random word for everyone! \n" + random.word.capitalize() + ": " + randomlist[0].text)
+wordExample = wordApi.getExamples(random.word)
+print wordExample.examples[1].text
+
+
+tweetApi.update_status("Random word for everyone! \n" + random.word.capitalize() + ": " + randomlist[0].text + "\n" + wordExample.examples[1].text)
 
 print("Tweet sent!")
+
