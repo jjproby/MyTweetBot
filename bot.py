@@ -2,6 +2,7 @@
 
 import tweepy
 from secrets import *
+from wordnik import *
 import requests
 from io import BytesIO
 from PIL import Image
@@ -53,6 +54,15 @@ def scramble(filename):
         result.paste(crop, box)
     result.save('scramble.png')
 
+def reply(username, status_id):
+	api.update_status("Thank you for tweeting at me, @" + username + "! <3", in_reply_to_status_id = status_id)
+	print("reply sent")
+
+def randomWord(username, status_id):
+    randomApi = WordsApi.WordsApi(wordClient)
+    random = randomApi.getRandomWord()
+    randomlist = wordApi.getDefinitions(random.word)
+    api.update_status("@" + username + " \n" + random.word.capitalize() + ": " + randomlist[0].text, in_reply_to_status_id = status_id)
 
 # create a class inherithing from the tweepy StreamListener
 class BotStreamer(tweepy.StreamListener):
@@ -61,12 +71,19 @@ class BotStreamer(tweepy.StreamListener):
     def on_status(self, status):
         username = status.user.screen_name
         status_id = status.id
+        print("Tweet recieved!")
 
     #entities provide structured data from Tweets including resolved URLs, media, hashtags
     #and mentions without having to parse the text to extract that information
         if 'media' in status.entities:
-            for image in status.entities['media']:
-                tweet_image(image['media_url'], username, status_id)
+            if "!image" in status.text:
+                for image in status.entities['media']:
+                    tweet_image(image['media_url'], username, status_id)
+        elif "!word" in status.text:
+            randomWord(username, status_id)
+
+        else:
+            reply(username, status_id)
 
 
 #create an OAuthHandler instance
@@ -80,6 +97,9 @@ auth.set_access_token(access_token, access_secret)
 
 api = tweepy.API(auth) #creates API object
 
+wordClient = swagger.ApiClient(apiKey, apiUrl)
+
+wordApi = WordApi.WordApi(wordClient)
 
 #constructs the Stream instance
 myStreamListener = BotStreamer()
@@ -88,12 +108,4 @@ stream = tweepy.Stream(auth, myStreamListener)
 # filter all tweets tweeted at the bot
 stream.filter(track=['@jjproby719'])
 
-
-"""
-
-#tweets on the authenticated users profile
-api.update_status("This is a test status")
-
-"""
-
-
+print("Stream failed")
