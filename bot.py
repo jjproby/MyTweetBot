@@ -1,5 +1,12 @@
 # bot.py
 
+'''
+
+@author: jjproby
+
+'''
+
+
 import tweepy
 from secrets import *
 from wordnik import *
