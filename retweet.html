@@ -26,8 +26,10 @@
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-getrandbits"><strong>getrandbits</strong></a>(...)</dt><dd><tt><a href="#-getrandbits">getrandbits</a>(k)&nbsp;-&gt;&nbsp;x.&nbsp;&nbsp;Generates&nbsp;a&nbsp;long&nbsp;int&nbsp;with&nbsp;k&nbsp;random&nbsp;bits.</tt></dd></dl>
+<td width="100%"><dl><dt><a name="-genTweet"><strong>genTweet</strong></a>(tweets, api)</dt><dd><tt>picks&nbsp;a&nbsp;random&nbsp;tweet&nbsp;from&nbsp;the&nbsp;array&nbsp;and&nbsp;tweets&nbsp;it</tt></dd></dl>
+ <dl><dt><a name="-getrandbits"><strong>getrandbits</strong></a>(...)</dt><dd><tt><a href="#-getrandbits">getrandbits</a>(k)&nbsp;-&gt;&nbsp;x.&nbsp;&nbsp;Generates&nbsp;a&nbsp;long&nbsp;int&nbsp;with&nbsp;k&nbsp;random&nbsp;bits.</tt></dd></dl>
  <dl><dt><a name="-random"><strong>random</strong></a>(...)</dt><dd><tt><a href="#-random">random</a>()&nbsp;-&gt;&nbsp;x&nbsp;in&nbsp;the&nbsp;interval&nbsp;[0,&nbsp;1).</tt></dd></dl>
+ <dl><dt><a name="-retweet"><strong>retweet</strong></a>(tweets, api)</dt><dd><tt>retweets&nbsp;the&nbsp;first&nbsp;five&nbsp;tweets&nbsp;on&nbsp;the&nbsp;timeline</tt></dd></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
@@ -45,8 +47,6 @@
 <strong>consumer_secret</strong> = 'Hg37xzpUFU2D6LszNlPfCyhcVincmomTkVQAftYEy8ZfBl7tue'<br>
 <strong>genius_id</strong> = 'GENIUS_API_ID'<br>
 <strong>genius_key</strong> = 'GENIUS_API_KEY'<br>
-<strong>i</strong> = 5<br>
-<strong>public_tweets</strong> = [Status(contributors=None, truncated=True, text=..., source=u'Twitter for iPhone', retweeted=False)]<br>
-<strong>random_tweets</strong> = ['Hello, I am bot', 'This is a randomly chosen tweet', 'Hi, how are you today?', 'I like Kanye West', 'Hamilton is great']<br>
-<strong>tweet_num</strong> = 1</td></tr></table>
+<strong>public_tweets</strong> = [Status(contributors=None, truncated=False, text...ace=None, source=u'SocialFlow', retweeted=False)]<br>
+<strong>random_tweets</strong> = ['Hello, I am bot', 'This is a randomly chosen tweet', 'Hi, how are you today?', 'I like Kanye West', 'Hamilton is great']</td></tr></table>
 </body></html>
