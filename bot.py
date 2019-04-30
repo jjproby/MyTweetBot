@@ -71,6 +71,56 @@ def randomWord(username, status_id):
     randomlist = wordApi.getDefinitions(random.word)
     api.update_status("@" + username + " \n" + random.word.capitalize() + ": " + randomlist[0].text, in_reply_to_status_id = status_id)
 
+def weather(username, status_id, city_name):
+ 
+	api_key = "a8e8b418dc32d0a2fc4a664886f95499"
+	  
+	# base_url variable to store url 
+	base_url = "http://api.openweathermap.org/data/2.5/weather?"
+	  
+	# complete_url variable to store 
+	# complete url address 
+	complete_url = base_url + "appid=" + api_key + "&q=" + city_name 
+	  
+	response = requests.get(complete_url) 
+	  
+	x = response.json() 
+	  
+	# Now x contains list of nested dictionaries 
+	# Check the value of "cod" key is equal to 
+	# "404", means city is found otherwise, 
+	# city is not found 
+	if x["cod"] != "404": 
+	  
+	    # store the value of "main" 
+	    # key in variable y 
+	    y = x["main"] 
+
+	    current_temperature = y["temp"] 
+
+	    current_pressure = y["pressure"] 
+	  
+	    current_humidiy = y["humidity"] 
+
+	    z = x["weather"] 
+	  
+	    # store the value corresponding  
+	    # to the "description" key at  
+	    # the 0th index of z 
+	    weather_description = z[0]["description"] 
+	    api.update_status(" Temperature (in kelvin unit) = " +
+		            str(current_temperature) + 
+		  "\n atmospheric pressure (in hPa unit) = " +
+		            str(current_pressure) +
+		  "\n humidity (in percentage) = " +
+		            str(current_humidiy) +
+		  "\n description = " +
+		            str(weather_description), in_reply_to_status_id = status_id) 
+	  
+	else: 
+	    api.update_status(" City Not Found ", in_reply_to_status_id = status_id)
+
+
 # create a class inherithing from the tweepy StreamListener
 class BotStreamer(tweepy.StreamListener):
 
@@ -88,6 +138,9 @@ class BotStreamer(tweepy.StreamListener):
                     tweet_image(image['media_url'], username, status_id)
         elif "!word" in status.text:
             randomWord(username, status_id)
+	elif "!weather" in status.text:
+		city = status.text[9:]
+		weather(username, status_id, city)
 
         else:
             reply(username, status_id)
