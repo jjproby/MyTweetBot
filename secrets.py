@@ -9,6 +9,4 @@ access_secret = 'TWITTER_ACCESS_TOKEN'
 apiUrl = 'http://api.wordnik.com/v4'
 apiKey = 'WORDNIK_API_KEY'
 
-genius_id = "GENIUS_API_ID"
-
-genius_key = "GENIUS_API_KEY"
+weather_api = 'OPENWEATHERAPI_KEY'

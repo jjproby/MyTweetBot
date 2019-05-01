@@ -20,7 +20,7 @@ def randWord():
 	wordTweet = "Random word for everyone! \n" + random.word.capitalize() + ": " + randomlist[0].text + "\n" + wordExample.examples[1].text
 
 
-	if wordTweet < 280: #If a tweet is more than 280 characters, tweet the definition and the word without the example.
+	if len(wordTweet) <= 280: #If a tweet is more than 280 characters, tweet the definition and the word without the example.
 	    tweetApi.update_status(wordTweet)
 	else:
 	    tweetApi.update_status("Random word for everyone! \n" + random.word.capitalize() + ": " + randomlist[0].text)

@@ -70,10 +70,9 @@ def randomWord(username, status_id):
     random = randomApi.getRandomWord()
     randomlist = wordApi.getDefinitions(random.word)
     api.update_status("@" + username + " \n" + random.word.capitalize() + ": " + randomlist[0].text, in_reply_to_status_id = status_id)
+    print("Tweet Sent")
 
-def weather(username, status_id, city_name):
- 
-	api_key = "a8e8b418dc32d0a2fc4a664886f95499"
+def weather(username, status_id, city_name, api_key):
 	  
 	# base_url variable to store url 
 	base_url = "http://api.openweathermap.org/data/2.5/weather?"
@@ -108,7 +107,7 @@ def weather(username, status_id, city_name):
 	    # to the "description" key at  
 	    # the 0th index of z 
 	    weather_description = z[0]["description"] 
-	    api.update_status(" Temperature (in kelvin unit) = " +
+	    api.update_status("@" + username + " " + city_name + " Weather: " + "\n Temperature (in kelvin unit) = " +
 		            str(current_temperature) + 
 		  "\n atmospheric pressure (in hPa unit) = " +
 		            str(current_pressure) +
@@ -118,7 +117,14 @@ def weather(username, status_id, city_name):
 		            str(weather_description), in_reply_to_status_id = status_id) 
 	  
 	else: 
-	    api.update_status(" City Not Found ", in_reply_to_status_id = status_id)
+	    api.update_status("@" + username + " City Not Found ", in_reply_to_status_id = status_id)
+	print("Tweet Sent")
+
+def definition(username, status_id, word):
+	wordlist = wordApi.getDefinitions(word)
+	api.update_status("@" + username + " \n" + word.capitalize() + ": " + wordlist[0].text, in_reply_to_status_id = status_id)
+	print("Tweet Sent")
+	
 
 
 # create a class inherithing from the tweepy StreamListener
@@ -133,14 +139,23 @@ class BotStreamer(tweepy.StreamListener):
     #entities provide structured data from Tweets including resolved URLs, media, hashtags
     #and mentions without having to parse the text to extract that information
         if 'media' in status.entities:
-            if "!image" in status.text:
-                for image in status.entities['media']:
-                    tweet_image(image['media_url'], username, status_id)
+		if "!image" in status.text:
+			for image in status.entities['media']:
+		        	tweet_image(image['media_url'], username, status_id)
+		else:
+			api.update_status("Thank you for the wonderful photo, @" + username + "! <3", in_reply_to_status_id = status_id)
+			print("reply sent") 
+			
         elif "!word" in status.text:
             randomWord(username, status_id)
 	elif "!weather" in status.text:
-		city = status.text[9:]
-		weather(username, status_id, city)
+		city = status.text[21:]
+		print status.text[21:]
+		weather(username, status_id, city, weather_api)
+	elif "!define" in status.text:
+		word = status.text[20:]
+		print status.text[20:]
+		definition(username, status_id, word)
 
         else:
             reply(username, status_id)
